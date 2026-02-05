@@ -17,6 +17,9 @@ import IntranetTrainings from './components/IntranetTrainings';
 import { IIntranetTrainingsProps } from './components/IIntranetTrainingsProps';
 
 export interface IIntranetTrainingsWebPartProps {
+  enableScroll: boolean;
+  dateBackgroundColor: string;
+  maxRowsBeforeScroll: number;
   categoryBgColor: string;
   categoryColor: string;
   showCategory: boolean;
@@ -72,7 +75,10 @@ cardHeight: Math.max(this.properties.cardHeight || 80, 0),
         // Category properties
         showCategory: this.properties.showCategory || false,
         categoryColor: this.properties.categoryColor || "#333333",
-        categoryBgColor: this.properties.categoryBgColor || "#f0f0f0"
+        categoryBgColor: this.properties.categoryBgColor || "#f0f0f0",
+        maxRowsBeforeScroll: this.properties.maxRowsBeforeScroll || 5,
+        dateBackgroundColor: this.properties.dateBackgroundColor || "#f8f9fa",
+        enableScroll: this.properties.enableScroll || false
       
       }
     );
@@ -166,14 +172,14 @@ protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
                 value: this.properties.itemsPerRow || 3,
                 showValue: true
               }),
-PropertyPaneSlider('cardHeight', {
-  label: 'Card Height (px)',
-  min: 0, 
-  max: 100, 
-  value: this.properties.cardHeight || 80,
-  showValue: true,
-  step: 5
-}),
+              PropertyPaneSlider('cardHeight', {
+                label: 'Card Height (px)',
+                min: 0,
+                max: 100,
+                value: this.properties.cardHeight || 80,
+                showValue: true,
+                step: 5
+              }),
               PropertyPaneToggle('showScheduledDate', {
                 label: 'Show Scheduled Date',
                 onText: 'Show',
@@ -185,6 +191,26 @@ PropertyPaneSlider('cardHeight', {
                 onText: 'Show',
                 offText: 'Hide',
                 checked: this.properties.showCategory || false
+              })
+            ]
+          },
+          {
+            groupName: 'Scroll Settings',
+            groupFields: [
+              PropertyPaneToggle('enableScroll', {
+                label: 'Enable Scroll',
+                onText: 'Yes',
+                offText: 'No',
+                checked: this.properties.enableScroll || false,
+                //description: 'Enable scroll when items exceed maximum rows'
+              }),
+              PropertyPaneSlider('maxRowsBeforeScroll', {
+                label: 'Max Rows Before Scroll',
+                min: 1,
+                max: 10,
+                value: this.properties.maxRowsBeforeScroll || 5,
+                showValue: true,
+                step: 1
               })
             ]
           },
@@ -245,10 +271,20 @@ PropertyPaneSlider('cardHeight', {
                 label: 'Item Title Color',
                 value: this.properties.titleColor || "#000000",
                 description: 'Enter color in hex format'
-              }),
+              })
+            ]
+          },
+          {
+            groupName: 'Date Section Settings',
+            groupFields: [
               PropertyPaneTextField('dateColor', {
-                label: 'Date Color',
+                label: 'Date Text Color',
                 value: this.properties.dateColor || "#333333",
+                description: 'Enter color in hex format'
+              }),
+              PropertyPaneTextField('dateBackgroundColor', {
+                label: 'Date Background Color',
+                value: this.properties.dateBackgroundColor || "#f8f9fa",
                 description: 'Enter color in hex format'
               })
             ]

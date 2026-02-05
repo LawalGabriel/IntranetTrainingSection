@@ -25,6 +25,10 @@ export interface IIntranetTrainingsProps {
   showCategory: boolean;
   categoryColor: string;
   categoryBgColor: string;
+  maxRowsBeforeScroll: number; 
+  dateBackgroundColor: string;
+  enableScroll: boolean; 
+  
 }
 
 export interface ITrainingItems {

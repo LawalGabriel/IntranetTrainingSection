@@ -46,6 +46,40 @@
   }
 }
 
+// Scrollable Grid Container
+.trainingGridContainer {
+  position: relative;
+  transition: all 0.3s ease;
+
+  &.scrollableGrid {
+    overflow-y: auto;
+    padding-right: 8px; // Space for scrollbar
+    
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+      
+      &:hover {
+        background: #a1a1a1;
+      }
+    }
+    
+    // Firefox scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+  }
+}
+
 .trainingGrid {
   display: grid;
   gap: 1.5rem;
@@ -89,7 +123,7 @@
   transition: all 0.3s ease;
   height: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  min-height: 100px; // Default fallback
+  min-height: 80px; // Default fallback
   position: relative; // For positioning category button
 
   // Left section - Scheduled Date
@@ -100,7 +134,7 @@
     justify-content: center;
     padding: 1rem;
     min-width: 100px;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; // Default fallback
 
     .cardDate {
       font-size: 0.9rem;
@@ -225,8 +259,18 @@
 
 // Responsive adjustments
 @media (max-width: 768px) {
+  .trainingGridContainer {
+    &.scrollableGrid {
+      padding-right: 6px;
+      
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+    }
+  }
+  
   .trainingCard {
-    min-height: 90px;
+    min-height: 70px;
     
     .cardLeft {
       min-width: 80px;
@@ -258,9 +302,19 @@
     padding: 0.5rem;
   }
 
+  .trainingGridContainer {
+    &.scrollableGrid {
+      padding-right: 4px;
+      
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+  }
+  
   .trainingCard {
     flex-direction: row;
-    min-height: 80px;
+    min-height: 60px;
 
     .cardLeft {
       min-width: 70px;

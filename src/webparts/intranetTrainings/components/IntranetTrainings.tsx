@@ -112,8 +112,6 @@ const IntranetTrainings: React.FC<IIntranetTrainingsProps> = (props) => {
     );
   }
 
-
-
   return (
   <div className={`${styles.intranetTrainings} ${props.useFullWidth ? styles.fullWidth : ''}`}>
     <div className={styles.container}>
@@ -149,80 +147,94 @@ const IntranetTrainings: React.FC<IIntranetTrainingsProps> = (props) => {
         </div>
       )}
 
-      {/* Training Items Grid */}
+      {/* Training Items Grid Container with Scroll */}
       <div 
-        className={styles.trainingGrid}
+        className={`${styles.trainingGridContainer} ${props.enableScroll ? styles.scrollableGrid : ''}`}
         style={{
-          gridTemplateColumns: `repeat(${props.itemsPerRow || 3}, 1fr)`
+          maxHeight: props.enableScroll 
+            ? `calc(${props.maxRowsBeforeScroll || 5} * (${props.cardHeight || 80}px + 1.5rem))`
+            : 'none'
         }}
       >
-        {trainingItems.length === 0 ? (
-          <div className={styles.noItems}>
-            <div>No training items found.</div>
-          </div>
-        ) : (
-          trainingItems.map((item: ITrainingItems) => (
-            <a
-              key={item.Id}
-              href={
-                typeof item.Link === 'object' && item.Link !== null && 'Url' in item.Link
-                  ? item.Link.Url
-                  : (typeof item.Link === 'string' ? item.Link : '#')
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.trainingCardLink}
-            >
-              <div 
-                className={styles.trainingCard}
-                style={{
-                  backgroundColor: props.cardBackgroundColor || '#ffffff',
-                  borderColor: props.cardBorderColor || '#e1e1e1',
-                  minHeight: `${props.cardHeight || 100}px`
-                }}
+        <div 
+          className={styles.trainingGrid}
+          style={{
+            gridTemplateColumns: `repeat(${props.itemsPerRow || 3}, 1fr)`
+          }}
+        >
+          {trainingItems.length === 0 ? (
+            <div className={styles.noItems}>
+              <div>No training items found.</div>
+            </div>
+          ) : (
+            trainingItems.map((item: ITrainingItems) => (
+              <a
+                key={item.Id}
+                href={
+                  typeof item.Link === 'object' && item.Link !== null && 'Url' in item.Link
+                    ? item.Link.Url
+                    : (typeof item.Link === 'string' ? item.Link : '#')
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.trainingCardLink}
               >
-                {/* Left Section - Scheduled Date (Conditional) */}
-                {props.showScheduledDate && (
-                  <div className={styles.cardLeft}>
+                <div 
+                  className={styles.trainingCard}
+                  style={{
+                    backgroundColor: props.cardBackgroundColor || '#ffffff',
+                    borderColor: props.cardBorderColor || '#e1e1e1',
+                    minHeight: `${props.cardHeight || 80}px`
+                  }}
+                >
+                  {/* Left Section - Scheduled Date (Conditional) */}
+                  {props.showScheduledDate && (
                     <div 
-                      className={styles.cardDate}
-                      style={{ color: props.dateColor || '#333333' }}
-                    >
-                      {getDisplayDate(item)}
-                    </div>
-                  </div>
-                )}
-
-                {/* Middle Section - Title Only */}
-                <div className={styles.cardMiddle}>
-                  <h3 
-                    className={styles.cardTitle}
-                    style={{ color: props.titleColor || '#000000' }}
-                  >
-                    {item.Title}
-                  </h3>
-                </div>
-
-                {/* Category Section - Small button on right side */}
-                {props.showCategory && item.Category && (
-                  <div className={styles.categoryContainer}>
-                    <div 
-                      className={styles.categoryButton}
-                      style={{
-                        backgroundColor: props.categoryBgColor || '#f0f0f0',
-                        color: props.categoryColor || '#333333'
+                      className={styles.cardLeft}
+                      style={{ 
+                        backgroundColor: props.dateBackgroundColor || '#f8f9fa'
                       }}
                     >
-                      <span className={styles.categoryText}>
-                        {item.Category}
-                      </span>
+                      <div 
+                        className={styles.cardDate}
+                        style={{ color: props.dateColor || '#333333' }}
+                      >
+                        {getDisplayDate(item)}
+                      </div>
                     </div>
+                  )}
+
+                  {/* Middle Section - Title Only */}
+                  <div className={styles.cardMiddle}>
+                    <h3 
+                      className={styles.cardTitle}
+                      style={{ color: props.titleColor || '#000000' }}
+                    >
+                      {item.Title}
+                    </h3>
                   </div>
-                )}
-              </div>
-            </a>
-          ))
-        )}
+
+                  {/* Category Section - Small button on right side */}
+                  {props.showCategory && item.Category && (
+                    <div className={styles.categoryContainer}>
+                      <div 
+                        className={styles.categoryButton}
+                        style={{
+                          backgroundColor: props.categoryBgColor || '#f0f0f0',
+                          color: props.categoryColor || '#333333'
+                        }}
+                      >
+                        <span className={styles.categoryText}>
+                          {item.Category}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </a>
+            ))
+          )}
+        </div>
       </div>
     </div>
   </div>
