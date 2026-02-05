@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "intranet-trainings-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/intranetTrainings/IntranetTrainingsWebPart.js",
+          "manifest": "./src/webparts/intranetTrainings/IntranetTrainingsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "IntranetTrainingsWebPartStrings": "lib/webparts/intranetTrainings/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+  }
+}

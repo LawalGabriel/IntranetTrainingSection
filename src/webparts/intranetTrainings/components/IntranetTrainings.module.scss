@@ -1,0 +1,286 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.intranetTrainings {
+  overflow: hidden;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+
+  &.fullWidth {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+// Centered Web Part Title
+.webpartTitleContainer {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  .webpartTitle {
+    line-height: 1.2;
+    
+    // Responsive font size
+    @media (max-width: 768px) {
+      font-size: 24px !important;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 20px !important;
+    }
+  }
+}
+
+.trainingGrid {
+  display: grid;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.trainingCardLink {
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    text-decoration: none;
+
+    .trainingCard {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-color: var(--themePrimary, #0078d4);
+    }
+
+    .categoryButton {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.trainingCard {
+  display: flex;
+  border: 1px solid;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-height: 100px; // Default fallback
+  position: relative; // For positioning category button
+
+  // Left section - Scheduled Date
+  .cardLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    min-width: 100px;
+    background-color: #f8f9fa;
+
+    .cardDate {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.2;
+    }
+  }
+
+  // Middle section - Title Only
+  .cardMiddle {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .cardTitle {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.3;
+      word-break: break-word;
+    }
+  }
+
+  // Category Container - Positioned on right side
+  .categoryContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none; // Allow clicking through to the main link
+  }
+}
+
+// Category Button - Small button style
+.categoryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 20px; // Pill shape
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  pointer-events: auto; // Make button clickable
+  cursor: pointer;
+  min-width: 80px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .categoryText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 1rem;
+
+  .loadingSpinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--themePrimary, #0078d4);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorContainer {
+  padding: 2rem;
+  text-align: center;
+
+  .retryButton {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--themePrimary, #0078d4);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--themeDark, #005a9e);
+    }
+  }
+}
+
+.noItems {
+  text-align: center;
+  padding: 3rem;
+  grid-column: 1 / -1;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .trainingCard {
+    min-height: 90px;
+    
+    .cardLeft {
+      min-width: 80px;
+      padding: 0.75rem;
+    }
+
+    .cardMiddle {
+      padding: 1rem;
+
+      .cardTitle {
+        font-size: 1rem;
+      }
+    }
+
+    .categoryContainer {
+      padding: 0.75rem;
+    }
+  }
+
+  .categoryButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    min-width: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  .trainingCard {
+    flex-direction: row;
+    min-height: 80px;
+
+    .cardLeft {
+      min-width: 70px;
+      padding: 0.5rem;
+    }
+
+    .cardMiddle {
+      padding: 0.75rem;
+      padding-right: 3rem; // Make space for category button
+    }
+
+    .categoryContainer {
+      padding: 0.5rem;
+    }
+  }
+
+  .categoryButton {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.65rem;
+    min-width: 60px;
+    border-radius: 15px;
+  }
+}

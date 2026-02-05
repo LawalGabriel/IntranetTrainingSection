@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.20.5",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.24.0"
+    },
+    "version": "1.20.0",
+    "libraryName": "intranet-training-section",
+    "libraryId": "a78bdb60-2dd3-4f57-8d1f-a4cc169da318",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "intranet-training-section",
+    "solutionShortDescription": "intranet-training-section description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
